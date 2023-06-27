@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            <img class="hero__img" src="./assets/images/main_burger.png" alt="Большой бургер">
+            <img class="hero__img" src="./assets/images/main_burger.png" alt="Большой бургер" [ngStyle]="heroImageStyle">
         </div>
     </section>
 </section>
@@ -146,7 +146,7 @@
             Оформление заказа
         </div>
 
-        <img class="order__img" src="./assets/images/order_image.png" alt="Контейнер с бургером">
+        <img class="order__img" src="./assets/images/order_image.png" alt="Контейнер с бургером" [ngStyle]="orderImageStyle">
 
         <div class="order__form">
             <div class="order__form-text">
@@ -185,3 +185,7 @@
         </div>
     </div>
 </footer>
+
+<div class="loader" [class]="{'showed': loaderShowed}" *ngIf="loader">
+  <lottie-player src="./assets/burger.json" background="transparent" speed="1.5" autoplay></lottie-player>
+</div>

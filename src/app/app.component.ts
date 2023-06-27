@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AppService } from './app.service';
 
@@ -10,6 +10,11 @@ import { AppService } from './app.service';
 export class AppComponent {
 
   currency = '$';
+  loaderShowed = true;
+  loader = true;
+
+  heroImageStyle: any;
+  orderImageStyle: any;
 
   form = this.fb.group({
     order: ["", Validators.required],
@@ -23,7 +28,19 @@ export class AppComponent {
 
   }
 
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMove(e: MouseEvent){
+    this.heroImageStyle = {transform: 'translate(-' + ((e.clientX * 0.3) / 8) + 'px,-' + ((e.clientY * 0.3) / 8) + 'px)'};
+    this.orderImageStyle = {transform: 'translate(-' + ((e.clientX * 0.3) / 8) + 'px,-' + ((e.clientY * 0.3) / 8) + 'px)'};
+  }
+
   ngOnInit(){
+    setTimeout(() => {
+      this.loaderShowed = false;
+    }, 3000);
+    setTimeout(() => {
+      this.loader = false;
+    }, 4000);
     this.appService.getData().subscribe(data => this.productsData = data);
   }
 
